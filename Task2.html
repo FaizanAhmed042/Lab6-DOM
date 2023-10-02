@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+</head>
+<body>
+
+<p><a id="w3r" type="text/html" hreflang="en-us" rel="nofollow" target="_self"
+href="http://www.w3resource.com/">w3resource</a></p> 
+<button id="getValue" onclick="getAttributes()">Click here to get attributes value</button>
+
+<script>
+    document.getElementById("getValue").addEventListener("click", function() {
+        
+        const link = document.querySelector("a");
+
+        const hrefValue = link.getAttribute("href");
+        const hreflangValue = link.getAttribute("hreflang");
+        const relValue = link.getAttribute("rel");
+        const targetValue = link.getAttribute("target");
+        const typeValue = link.getAttribute("type");
+
+        // Display the values
+        alert(`href: ${hrefValue}\nhreflang: ${hreflangValue}\nrel: ${relValue}\ntarget: ${targetValue}\ntype: ${typeValue}`);
+    });
+</script>
+
+</body>
+</html>

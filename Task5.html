@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+</head>
+<body>
+<div class="header">
+</div>
+
+<section id="container">
+    <ul id="myUL">
+        <li class="first">one</li>
+        <li class="second">two</li>
+        <li class="third">three</li>
+    </ul>
+    <ol id="myOl">
+        <li class="first">one</li>
+        <li class="second">two</li>
+        <li class="third">three</li>
+    </ol>
+</section>
+
+<div class="footer">
+</div>
+
+<script>
+    // 1
+    document.getElementById("container");
+    // 2
+    document.querySelector("#container");
+    // 3
+    document.querySelectorAll(".second");
+    // 4
+    document.querySelector("ol .third");
+    // 5
+    var give = document.querySelector("#container");
+    give.innerHTML="Hello";
+    // 6
+    const footerElement = document.querySelector(".footer");
+    footerElement.classList.add("main");
+    // 7
+    const footerRemover = document.querySelector(".footer");
+    footerRemover.classList.remove("main");
+    // 8
+    const newLI = document.createElement("li");
+    // 9
+    newLI.textContent = "four";
+    // 10
+    const myul = document.getElementById("myUL");
+    myul.appendChild(newLI);
+    // 11
+    const myol = document.getElementById("myOl");
+
+    const list_item = myol.getElementsByTagName("li");
+
+    for (let i = 0; i < list_item.length; i++) {
+        list_item[i].style.backgroundColor = "green";
+    }
+    // 12
+    // footerRemover already decleared in above Q.7
+    // const footerRemover = document.querySelector(".footer");
+
+    if (footerRemover) {
+        footerRemover.parentNode.removeChild(footerRemover);
+    }
+</script>
+
+</body>

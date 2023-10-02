@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .cell {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            padding-top: 20dp;
+            font-size: 36px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5" style="background-color: rgb(233, 139, 17);">
+        <h1 class="text-center mb-3">Tic Tac Toe</h1>
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <div class="alert alert-info text-center" id="message">Player X's Turn</div>
+                <div class="alert alert-danger text-center d-none" id="winner">Player X wins!</div>
+                <div class="alert alert-warning text-center d-none" id="draw">It's a draw!</div>
+                <div class="row">
+                    <div class="col cell" onclick="makeMove(0)"></div>
+                    <div class="col cell" onclick="makeMove(1)"></div>
+                    <div class="col cell" onclick="makeMove(2)"></div>
+                </div>
+                <div class="row">
+                    <div class="col cell" onclick="makeMove(3)"></div>
+                    <div class="col cell" onclick="makeMove(4)"></div>
+                    <div class="col cell" onclick="makeMove(5)"></div>
+                </div>
+                <div class="row">
+                    <div class="col cell" onclick="makeMove(6)"></div>
+                    <div class="col cell" onclick="makeMove(7)"></div>
+                    <div class="col cell" onclick="makeMove(8)"></div>
+                </div>
+                <center><button class="btn btn-primary mt-3" onclick="resetBoard()" style="margin-bottom: 20px;">Restart</button></center>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let board = ["", "", "", "", "", "", "", "", ""];
+        let currentPlayer = "X";
+        let gameOver = false;
+
+        function makeMove(cellIndex) {
+            if (!gameOver && board[cellIndex] === "") {
+                board[cellIndex] = currentPlayer;
+                document.getElementsByClassName("cell")[cellIndex].innerText = currentPlayer;
+                currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+                if (checkWin()) {
+                    document.getElementById("message").style.display = "none";
+                    document.getElementById("winner").style.display = "block";
+                    gameOver = true;
+                } else if (checkDraw()) {
+                    document.getElementById("message").style.display = "none";
+                    document.getElementById("draw").style.display = "block";
+                    gameOver = true;
+                } else {
+                    document.getElementById("message").innerText = `Player ${currentPlayer}'s Turn`;
+                }
+            }
+        }
+
+        function checkWin() {
+            const winConditions = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+            for (const condition of winConditions) {
+                const [a, b, c] = condition;
+                if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function checkDraw() {
+            return board.every(cell => cell !== "");
+        }
+
+        function resetBoard() {
+            board = ["", "", "", "", "", "", "", "", ""];
+            currentPlayer = "X";
+            gameOver = false;
+            document.getElementById("message").style.display = "block";
+            document.getElementById("message").innerText = "Player X's Turn";
+            document.getElementById("winner").style.display = "none";
+            document.getElementById("draw").style.display = "none";
+
+            const cells = document.getElementsByClassName("cell");
+            for (const cell of cells) {
+                cell.innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>
